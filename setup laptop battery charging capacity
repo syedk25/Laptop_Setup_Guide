@@ -1,0 +1,14 @@
+install software TLP
+
+it is a command-line power management utility for Linux that optimizes laptop battery life by automatically adjusting hardware power settings when switching between AC power and battery
+
+remove the old one : sudo apt remove power-profiles-daemon
+add new one :       sudo apt update && sudo apt install tlp tlp-rdw
+start the service : sudo tlp start
+
+check the hardware support : sudo tlp-stat -b
+
+create cofig file to set max charging capacity : 
+                                          echo -e "START_CHARGE_THRESH_BAT0=55\nSTOP_CHARGE_THRESH_BAT0=60" | sudo tee /etc/tlp.d/01-battery-limit.conf
+
+Charge to 100% once (e.g., before traveling): sudo tlp fullcharge
